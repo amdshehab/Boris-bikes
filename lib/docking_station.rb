@@ -1,6 +1,6 @@
 class DockingStation
   attr_reader :capacity
-
+  DEFAULT_CAPACITY = 20
   def initialize
     capacity = []
     @capacity = capacity
@@ -25,7 +25,7 @@ class DockingStation
   private
 
   def full?
-    if @capacity.size >= 20
+    if @capacity.size >= DEFAULT_CAPACITY
       true
     else
       false

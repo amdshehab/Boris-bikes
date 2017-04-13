@@ -34,7 +34,7 @@ it 'expects bike to be working' do
 end
 
   it 'should raise an error when docked bikes = 20 and docking' do
-     20.times {subject.dock(Bike.new)}
+     DockingStation::DEFAULT_CAPACITY.times {subject.dock(Bike.new)}
     expect{  subject.dock(Bike.new)}.to raise_error("full up")
   end
 
