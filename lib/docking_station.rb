@@ -7,7 +7,7 @@ class DockingStation
   end
 
   def release_bike
-    if @capacity == []
+    if empty?
      raise "no bikes"
     else
       @capacity.pop
@@ -15,13 +15,30 @@ class DockingStation
   end
 
   def dock(bike)
-    if @capacity.size <= 19
-      @capacity.push(bike)
-    else
+    if full?
       raise "full up"
+    else
+      @capacity.push(bike)
     end
   end
 
+  private
+
+  def full?
+    if @capacity.size >= 20
+      true
+    else
+      false
+    end
+  end
+
+  def empty?
+    if @capacity == []
+      true
+    else
+      false
+    end
+  end
 
 end
 
