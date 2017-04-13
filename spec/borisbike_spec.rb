@@ -26,13 +26,17 @@ it 'expects bike to be working' do
    docking_station = DockingStation.new
    expect(docking_station).to respond_to(:dock)
  end
- it 'should raise an error when @bike = nil' do
-if @bike == nil
-  expect{subject.release_bike}.to raise_error("no bikes")
+
+ it 'should raise an error when @bike = nil when releasing' do
+   if @bike == nil
+     expect{subject.release_bike}.to raise_error("no bikes")
+  end
 end
-end
- #it {expect { subject.bike(what: nil)}.to raise_error(RuntimeError,"no bikes")}
+
+  it 'should raise an error when docked bikes = 1 and docking' do
+    p subject.dock(Bike.new)
+    expect{ p subject.dock(Bike.new)}.to raise_error("full up")
+  end
+
+
  end
-
-
-#expect(obj).to respond_to(:foo).with(1).argument

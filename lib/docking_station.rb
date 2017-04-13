@@ -10,8 +10,13 @@ class DockingStation
   end
 
   def dock(bike)
-    @bike = bike
+    if @bike == nil
+      @bike = bike
+    else
+      raise "full up"
+    end
   end
+
 end
 
 docking_station = DockingStation.new
