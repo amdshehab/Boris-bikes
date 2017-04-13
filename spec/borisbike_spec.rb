@@ -28,15 +28,14 @@ it 'expects bike to be working' do
  end
 
  it 'should raise an error when @bike = nil when releasing' do
-   if @bike == nil
+   if @capacity == nil
      expect{subject.release_bike}.to raise_error("no bikes")
   end
 end
 
-  it 'should raise an error when docked bikes = 1 and docking' do
-    p subject.dock(Bike.new)
-    expect{ p subject.dock(Bike.new)}.to raise_error("full up")
+  it 'should raise an error when docked bikes = 20 and docking' do
+     20.times {subject.dock(Bike.new)}
+    expect{  subject.dock(Bike.new)}.to raise_error("full up")
   end
-
 
  end

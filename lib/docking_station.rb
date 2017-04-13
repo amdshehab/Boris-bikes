@@ -1,21 +1,27 @@
 class DockingStation
-  attr_reader :bike
+  attr_reader :capacity
+
+  def initialize
+    capacity = []
+    @capacity = capacity
+  end
 
   def release_bike
-    if @bike == nil
+    if @capacity == []
      raise "no bikes"
     else
-      @bike
+      @capacity.pop
     end
   end
 
   def dock(bike)
-    if @bike == nil
-      @bike = bike
+    if @capacity.size <= 19
+      @capacity.push(bike)
     else
       raise "full up"
     end
   end
+
 
 end
 
