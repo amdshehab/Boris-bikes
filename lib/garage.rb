@@ -8,8 +8,8 @@ attr_accessor :van
     @van = docking_station.bikes
   end
 
-  def return_bikes
-
+  def return_bikes(docking_station)
+    docking_station.bikes = van
   end
 
   def fix_bikes
