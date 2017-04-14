@@ -37,5 +37,15 @@ end
      DockingStation::DEFAULT_CAPACITY.times {subject.dock(Bike.new)}
     expect{  subject.dock(Bike.new)}.to raise_error("full up")
   end
-#test
+
+  it "dock accepts argument to #capacity" do
+    cap = 15
+    ds = DockingStation.new(cap)
+    ds.capacity == cap
+  end
+
+  it "#capacity is 20 when no agrument passed to new #docking_station" do
+    expect(subject.capacity).to eq 20
+  end
+
  end
