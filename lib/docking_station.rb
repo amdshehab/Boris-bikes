@@ -2,13 +2,14 @@ require_relative 'bike'
 
 class DockingStation
 
-  attr_accessor :bikes, :capacity
+  attr_accessor :bikes, :capacity, :broken_bikes
 
   DEFAULT_CAPACITY = 20
 
   def initialize(capacity = DEFAULT_CAPACITY)
     @capacity = capacity
     @bikes = []
+    @broken_bikes = []
   end
 
   def release_bike
@@ -24,6 +25,10 @@ class DockingStation
   def dock(bike)
     raise "full up" if full?
     @bikes.push(bike)
+  end
+
+  def broken
+    @broken_bikes << bikes.select{|x| x.working == false}
   end
 
 

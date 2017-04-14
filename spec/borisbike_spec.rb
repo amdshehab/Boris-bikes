@@ -23,7 +23,7 @@ describe DockingStation do
     docking_station = DockingStation.new
     expect(docking_station).to respond_to(:dock).with(1).argument
   end
-  
+
   it 'expects docking_station to respond to the dock method' do
     docking_station = DockingStation.new
     expect(docking_station).to respond_to(:dock)
@@ -60,5 +60,15 @@ describe DockingStation do
     expect(subject.find_bike).to eq 1
   end
 
+  it "identifies broken bikes and stores them" do
+  bike1 = double(:bike)
+  allow(bike1).to receive(:working).and_return(true)
+  subject.dock(bike1)
+  bike2 = double(:bike)
+  allow(bike2).to receive(:working).and_return(false)
+  subject.dock(bike2)
+  subject.broken
+  expect(subject.broken_bikes.count).to eq 1
 
+end
 end
