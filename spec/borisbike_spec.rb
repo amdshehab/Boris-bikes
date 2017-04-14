@@ -1,6 +1,8 @@
 require 'docking_station'
 
 describe DockingStation do
+let(:bike) {double(:bike)}
+
   it " creates an instance of DockingStation" do
     expect(DockingStation.new).to be_an_instance_of(DockingStation)
   end
@@ -29,13 +31,13 @@ describe DockingStation do
 
  it 'should raise an error when @bike = nil when releasing' do
    if @capacity == nil
-     expect{subject.release_bike}.to raise_error("no bikes")
+     expect{subject.release_bike}.to raise_error("No working bikes available")
   end
 end
 
   it 'should raise an error when docked bikes = 20 and docking' do
-     DockingStation::DEFAULT_CAPACITY.times {subject.dock(double(:bike).new)}
-    expect{  subject.dock(double(:bike).new)}.to raise_error("full up")
+     DockingStation::DEFAULT_CAPACITY.times {subject.dock(double(:bike))}
+    expect{  subject.dock(double(:bike))}.to raise_error("full up")
   end
 
   it "dock accepts argument to #capacity" do
@@ -49,8 +51,12 @@ end
   end
 
   it "identify the first available working bike" do
-      subject.dock(double(:bike).new(false))
-      subject.dock(double(:bike).new)
+    bike = double(:bike)
+    allow(bike).to receive(:working).and_return(false)
+      subject.dock(bike)
+      bike2 = double(:bike)
+      allow(bike2).to receive(:working).and_return(true)
+      subject.dock(bike2)
       expect(subject.find_bike).to eq 1
   end
 
