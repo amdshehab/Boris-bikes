@@ -12,20 +12,21 @@ class DockingStation
   end
 
   def release_bike
-    if empty?
-     raise "no bikes"
-    else
-      @bikes.pop
-    end
+    raise "No working bikes available" if empty?
+    bikes.delete_at(find_bike)
   end
 
-  def dock(bike)
-    if full?
-      raise "full up"
-    else
-      @bikes.push(bike)
-    end
+  def find_bike
+    bikes.index{ |x| x.working == true }
   end
+
+
+  def dock(bike)
+    raise "full up" if full?
+    @bikes.push(bike)
+  end
+
+
 
   private
 
@@ -38,7 +39,7 @@ class DockingStation
   end
 
   def empty?
-    if @bikes == []
+    if bikes.count{ |x| x.working == true } == 0
       true
     else
       false
