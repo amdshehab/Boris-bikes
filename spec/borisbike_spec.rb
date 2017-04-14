@@ -8,12 +8,12 @@ describe DockingStation do
  it {is_expected.to respond_to(:release_bike)}
 
 #  it 'expects DockingStation to get a bike' do
-#    subject.dock(Bike.new)
-#    expect(subject.release_bike).to be_an_instance_of(Bike)
+#    subject.dock(double(:bike).new)
+#    expect(subject.release_bike).to be_an_instance_of(double(:bike))
 # end
 
 # it 'expects bike to be working' do
-#   subject.dock(Bike.new)
+#   subject.dock(double(:bike).new)
 #   expect(subject.release_bike.working?).to eq true
 #  end
 
@@ -34,8 +34,8 @@ describe DockingStation do
 end
 
   it 'should raise an error when docked bikes = 20 and docking' do
-     DockingStation::DEFAULT_CAPACITY.times {subject.dock(Bike.new)}
-    expect{  subject.dock(Bike.new)}.to raise_error("full up")
+     DockingStation::DEFAULT_CAPACITY.times {subject.dock(double(:bike).new)}
+    expect{  subject.dock(double(:bike).new)}.to raise_error("full up")
   end
 
   it "dock accepts argument to #capacity" do
@@ -49,9 +49,10 @@ end
   end
 
   it "identify the first available working bike" do
-      subject.dock(Bike.new(false))
-      subject.dock(Bike.new)
+      subject.dock(double(:bike).new(false))
+      subject.dock(double(:bike).new)
       expect(subject.find_bike).to eq 1
   end
+
 
  end
